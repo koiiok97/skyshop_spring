@@ -1,10 +1,14 @@
 package org.skypro.skyshop.controller;
 
+import org.skypro.skyshop.exception.NoSuchProductException;
+import org.skypro.skyshop.exception.error.ShopError;
 import org.skypro.skyshop.model.Article;
 import org.skypro.skyshop.model.Product;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.service.BasketService;
 import org.skypro.skyshop.service.StorageService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,8 +47,8 @@ public class ShopController {
     public String addProduct(@PathVariable("id")UUID id){
         basketService.addProductInBasket(id);
         return "Продукт успешно добавлен!";
-
     }
+
 
     @GetMapping("/basket")
     public UserBasket getUserBasket(){
