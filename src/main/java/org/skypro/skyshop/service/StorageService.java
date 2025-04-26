@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -59,5 +60,9 @@ public class StorageService {
                 productMap.values().stream(),
                 articleMap.values().stream()
         ).toList();
+    }
+
+    public Optional<Product> getProductById(UUID id){
+        return Optional.ofNullable(productMap.get(id));
     }
 }
