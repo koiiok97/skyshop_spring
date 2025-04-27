@@ -26,7 +26,10 @@ public class BasketService {
 
     public UserBasket getUserBasket(){
         List<BasketItem> list = productBasket.getBasket().entrySet().stream()
-                .map(el -> new BasketItem(storageService.getProductById(el.getKey()).get(), el.getValue()))
+                .map( (el) -> {
+                    if(storageService.getProductById(el.getKey()).isEmpty()) throw new NoSuchProductException();
+                    return new BasketItem(storageService.getProductById(el.getKey()).get(), el.getValue());
+                })
                 .toList();
         return new UserBasket(list);
     }
